@@ -133,5 +133,12 @@ public class GameService {
         game.rename(request.getPlayerName());
         return new RenameResponse(game.getId(),  game.getPlayerName());
     }
+
     // TODO (Lv 8): 게임 삭제
+    @Transactional
+    public void deleteGame(Long gameId) {
+        Game game = findGame(gameId);
+        runCardRepository.deleteAllByGame(game);
+        gameRepository.deleteById(gameId);
+    }
 }
