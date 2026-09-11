@@ -14,8 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "games")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EntityListeners(AuditingEntityListener.class)
-public class Game {
+public class Game extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,14 +35,6 @@ public class Game {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 16)
     private GameStatus status;
-
-    @CreatedDate
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @LastModifiedDate
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
 
     public Game(String playerName) {
         this.playerName = playerName;
